@@ -1,0 +1,39 @@
+apiVersion: apps/v1  
+kind: Deployment  
+metadata:  
+  labels:  
+    app: echo-server   
+  name: echo-server  
+  namespace: echo-server 
+spec:  
+  selector:  
+    matchLabels:  
+      app: echo-server  
+  replicas: 1  
+  template:  
+    metadata:  
+      labels:  
+        app: echo-server    
+      name: echo-server  
+    spec:  
+      containers:  
+        - name: echo-server  
+          image: <IMAGE_REGISTRY_REPO_TAG>  
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 5000
+          resources:  
+            limits:  
+              cpu: 100m  
+              memory: 10Mi  
+            requests:  
+              cpu: 100m  
+              memory: 10Mi  
+          volumeMounts:  
+            - readOnly: true  
+              mountPath: templates  
+              name: html-files  
+      volumes:  
+        - name: html-files  
+          configMap:  
+            name: echo-server-static-files  

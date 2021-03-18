@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: echo-server-service
+  # annotations:
+  #   service.beta.kubernetes.io/aws-load-balancer-type: nlb-ip
+spec:
+  ports:
+    - port: 5000
+      targetPort: 5000
+      protocol: TCP
+  type: LoadBalancer
+  selector:
+    app: echo-server
