@@ -18,20 +18,20 @@ spec:
     spec:  
       containers:  
         - name: echo-server  
-          image: <IMAGE_REGISTRY_REPO_TAG>  
+          image: 528977880076.dkr.ecr.eu-central-1.amazonaws.com/echo:v1
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
           resources:  
             limits:  
-              cpu: 100m  
-              memory: 10Mi  
+              cpu: 500m  
+              memory: 250Mi  
             requests:  
               cpu: 100m  
               memory: 10Mi  
           volumeMounts:  
             - readOnly: true  
-              mountPath: templates  
+              mountPath: app/templates  
               name: html-files  
       volumes:  
         - name: html-files  
